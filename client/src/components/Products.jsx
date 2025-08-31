@@ -13,7 +13,6 @@ export default function Products() {
     const [search, setSearch] = useState("");
     const [loading, setLoading] = useState(false);
 
-    // Function to book product (instead of local cart only)
     const addToCart = async (product) => {
         try {
             setLoading(true);
@@ -26,8 +25,11 @@ export default function Products() {
                     Authorization: `Bearer ${token}`,
                 },
                 body: JSON.stringify({
-                    product: product.name,
-                    quantity: "1 unit", // default (can be extended later with dropdown)
+                     products: [
+                        {
+                            name: product.name,
+                            quantity: 1, 
+                            },],
                 }),
             });
 
@@ -46,7 +48,6 @@ export default function Products() {
         }
     };
 
-    // Filter products based on search input
     const filteredProducts = products.filter((p) =>
         p.name.toLowerCase().includes(search.toLowerCase())
     );
@@ -55,7 +56,6 @@ export default function Products() {
         <section id="products" className="p-8 bg-green-50 min-h-screen">
             <h2 className="text-2xl font-bold mb-4">Available Products</h2>
 
-            {/* 🔍 Search Bar */}
             <div className="mb-6 flex justify-center">
                 <input
                     type="text"
@@ -66,7 +66,6 @@ export default function Products() {
                 />
             </div>
 
-            {/* Product Grid */}
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                 {filteredProducts.length > 0 ? (
                     filteredProducts.map((p) => (
