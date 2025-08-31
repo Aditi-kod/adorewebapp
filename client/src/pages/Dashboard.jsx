@@ -18,7 +18,7 @@ export default function Dashboard() {
 
                 const data = await res.json();
                 if (res.ok) {
-                    setBookings(data);
+                    setBookings(data.bookings);
                 } else {
                     console.error(data.message);
                 }
@@ -50,11 +50,15 @@ export default function Dashboard() {
                                 className="flex justify-between items-center p-4 border rounded-lg"
                             >
                                 <div>
-                                    {b.products.map((p) => (
+                                    {Array.isArray(b.products) && b.products.length> 0 ?(
+                                    b.products.map((p) => (
                                         <div key={p._id}>
                                             {p.name} - {p.quantity}
                                         </div>
-                                    ))}
+                                    ))
+                                    ): (
+                                        <div>No products in this booking.</div>
+                                    )}
                                 </div>
                                 <span
                                     className={`px-3 py-1 rounded-full text-sm ${
