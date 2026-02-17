@@ -14,7 +14,7 @@ const app = express();
 app.use(express.json());
 app.use(
     cors({
-        origin: "http://adorewebapp.vercel.app",
+        origin: "https://adorewebapp.vercel.app",
         credentials: true,
     })
 );
