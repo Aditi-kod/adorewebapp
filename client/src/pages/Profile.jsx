@@ -10,7 +10,7 @@ export default function Profile() {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const res = await fetch("http://localhost:5000/api/user/profile", {
+                const res = await fetch("https://adorewebapp.onrender.com/api/user/profile", {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 const data = await res.json();
